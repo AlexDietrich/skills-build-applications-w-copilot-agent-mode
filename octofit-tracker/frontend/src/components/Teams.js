@@ -3,8 +3,8 @@ import DataTableCard from './DataTableCard';
 
 const getEndpoint = () => {
   const codespaceName = process.env.REACT_APP_CODESPACE_NAME;
-  const baseUrl = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : 'http://localhost:8000';
-  return `${baseUrl}/api/teams/`;
+  const codespaceEndpoint = codespaceName ? `https://${codespaceName}-8000.app.github.dev/api/teams/` : null;
+  return codespaceEndpoint || 'http://localhost:8000/api/teams/';
 };
 
 const normalizePayload = (payload) => {
@@ -41,6 +41,7 @@ function Teams() {
 
   const fetchTeams = useCallback(async () => {
     const endpoint = getEndpoint();
+    console.log('Teams endpoint:', endpoint);
     setLoading(true);
     setError(null);
 
@@ -50,6 +51,7 @@ function Teams() {
         throw new Error(`Request failed with status ${response.status}`);
       }
       const data = await response.json();
+      console.log('Teams data:', data);
       setTeams(normalizePayload(data));
     } catch (err) {
       setError(err.message);

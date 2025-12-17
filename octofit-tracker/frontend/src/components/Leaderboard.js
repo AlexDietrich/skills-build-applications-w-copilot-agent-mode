@@ -3,8 +3,10 @@ import DataTableCard from './DataTableCard';
 
 const getEndpoint = () => {
   const codespaceName = process.env.REACT_APP_CODESPACE_NAME;
-  const baseUrl = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : 'http://localhost:8000';
-  return `${baseUrl}/api/leaderboard/`;
+  const codespaceEndpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard/`
+    : null;
+  return codespaceEndpoint || 'http://localhost:8000/api/leaderboard/';
 };
 
 const normalizePayload = (payload) => {
@@ -41,6 +43,7 @@ function Leaderboard() {
 
   const fetchLeaderboard = useCallback(async () => {
     const endpoint = getEndpoint();
+    console.log('Leaderboard endpoint:', endpoint);
     setLoading(true);
     setError(null);
 
@@ -50,6 +53,7 @@ function Leaderboard() {
         throw new Error(`Request failed with status ${response.status}`);
       }
       const data = await response.json();
+      console.log('Leaderboard data:', data);
       setEntries(normalizePayload(data));
     } catch (err) {
       setError(err.message);

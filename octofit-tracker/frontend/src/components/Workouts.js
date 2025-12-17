@@ -3,8 +3,10 @@ import DataTableCard from './DataTableCard';
 
 const getEndpoint = () => {
   const codespaceName = process.env.REACT_APP_CODESPACE_NAME;
-  const baseUrl = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : 'http://localhost:8000';
-  return `${baseUrl}/api/workouts/`;
+  const codespaceEndpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/workouts/`
+    : null;
+  return codespaceEndpoint || 'http://localhost:8000/api/workouts/';
 };
 
 const normalizePayload = (payload) => {
@@ -41,6 +43,7 @@ function Workouts() {
 
   const fetchWorkouts = useCallback(async () => {
     const endpoint = getEndpoint();
+    console.log('Workouts endpoint:', endpoint);
     setLoading(true);
     setError(null);
 
@@ -50,6 +53,7 @@ function Workouts() {
         throw new Error(`Request failed with status ${response.status}`);
       }
       const data = await response.json();
+      console.log('Workouts data:', data);
       setWorkouts(normalizePayload(data));
     } catch (err) {
       setError(err.message);

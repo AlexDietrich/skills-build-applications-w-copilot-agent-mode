@@ -3,8 +3,8 @@ import DataTableCard from './DataTableCard';
 
 const getEndpoint = () => {
   const codespaceName = process.env.REACT_APP_CODESPACE_NAME;
-  const baseUrl = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : 'http://localhost:8000';
-  return `${baseUrl}/api/users/`;
+  const codespaceEndpoint = codespaceName ? `https://${codespaceName}-8000.app.github.dev/api/users/` : null;
+  return codespaceEndpoint || 'http://localhost:8000/api/users/';
 };
 
 const normalizePayload = (payload) => {
@@ -41,6 +41,7 @@ function Users() {
 
   const fetchUsers = useCallback(async () => {
     const endpoint = getEndpoint();
+    console.log('Users endpoint:', endpoint);
     setLoading(true);
     setError(null);
 
@@ -50,6 +51,7 @@ function Users() {
         throw new Error(`Request failed with status ${response.status}`);
       }
       const data = await response.json();
+      console.log('Users data:', data);
       setUsers(normalizePayload(data));
     } catch (err) {
       setError(err.message);
