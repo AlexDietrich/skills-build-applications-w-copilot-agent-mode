@@ -18,6 +18,9 @@ import os
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
 from tracker import views as tracker_views
 
@@ -34,9 +37,21 @@ if codespace_name:
 else:
     base_url = "http://localhost:8000"
 
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response(
+        {
+            'users': f"{base_url}{reverse('userprofile-list', request=None, format=format)}",
+            'teams': f"{base_url}{reverse('team-list', request=None, format=format)}",
+            'activities': f"{base_url}{reverse('activity-list', request=None, format=format)}",
+            'workouts': f"{base_url}{reverse('workout-list', request=None, format=format)}",
+            'leaderboard': f"{base_url}{reverse('leaderboardentry-list', request=None, format=format)}",
+        }
+    )
+
 urlpatterns = [
-    path('', tracker_views.api_root, name='api-root'),
+    path('', api_root, name='api-root'),
     path('admin/', admin.site.urls),
-    path('api/', tracker_views.api_root),
+    path('api/', api_root),
     path('api/', include(router.urls)),
 ]
