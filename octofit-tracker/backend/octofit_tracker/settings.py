@@ -28,10 +28,9 @@ SECRET_KEY = 'django-insecure-u*l97y6yjn&vb#$h4y#@z)((*%dnk4d3c@pn#nv*r6-4f0__nn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 if os.environ.get('CODESPACE_NAME'):
     ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev")
-codespace_name = os.environ.get('CODESPACE_NAME')
 
 
 # Application definition
@@ -43,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'octofit_tracker',
     'rest_framework',
+    'djongo',
     'corsheaders',
     'tracker',
 ]
@@ -83,16 +84,13 @@ WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-MONGODB_URI = os.environ.get('MONGODB_URI', 'mongodb://127.0.0.1:27017')
-MONGODB_DB_NAME = os.environ.get('MONGODB_DB_NAME', 'octofit_db')
-
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': MONGODB_DB_NAME,
+        'NAME': os.environ.get('MONGODB_DB_NAME', 'octofit_db'),
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': MONGODB_URI,
+            'host': os.environ.get('MONGODB_URI', 'mongodb://127.0.0.1:27017'),
         },
     }
 }
@@ -145,22 +143,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-cors_allowed_origins = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-]
-
-if codespace_name:
-    cors_allowed_origins.extend(
-        [
-            f"https://{codespace_name}-3000.app.github.dev",
-            f"https://{codespace_name}-8000.app.github.dev",
-        ]
-    )
-
-CORS_ALLOWED_ORIGINS = cors_allowed_origins
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = list(default_methods)
-CORS_ALLOW_HEADERS = list(default_headers)
+CORS_ALLOW_METHODS = list(default_methods) + ['*']
+CORS_ALLOW_HEADERS = list(default_headers) + ['*']
