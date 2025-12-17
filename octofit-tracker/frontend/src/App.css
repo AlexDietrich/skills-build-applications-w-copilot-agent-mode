@@ -1,0 +1,177 @@
+:root {
+  --octo-primary: #1f3b66;
+  --octo-surface: #f4f6f9;
+  --octo-dark: #0d1526;
+  --octo-accent: #d6a34a;
+  --octo-emerald: #2f6f5e;
+  --octo-ink: #111827;
+}
+
+body {
+  background: radial-gradient(110% 120% at 18% 18%, #f5f7fb 0%, #e8ecf3 38%, #f7f9fc 100%);
+  color: var(--octo-dark);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.app-surface {
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(31, 59, 102, 0.08), rgba(47, 111, 94, 0.06)),
+    radial-gradient(58% 48% at 80% 12%, rgba(214, 163, 74, 0.07), transparent 55%);
+}
+
+.hero {
+  background: linear-gradient(135deg, #1f3b66, #30517f 55%, #d8deea 100%);
+  color: #0f1a2d;
+  border: 1px solid rgba(31, 59, 102, 0.12);
+}
+
+.hero .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #0f1a2d;
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.75);
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar .nav-link.active {
+  color: var(--octo-primary);
+  background-color: #fff;
+}
+
+.navbar .nav-link:hover:not(.active) {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.navbar.bg-primary {
+  background: linear-gradient(120deg, #0d1526 0%, #1f3b66 45%, #2f4f81 82%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.logo-mark {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.2);
+}
+
+.card {
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.08);
+  border: 1px solid rgba(17, 24, 39, 0.05);
+  backdrop-filter: blur(6px);
+}
+
+.table-hover tbody tr:hover {
+  background-color: #eef2f7;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+.table thead {
+  background: linear-gradient(90deg, rgba(31, 59, 102, 0.1), rgba(47, 111, 94, 0.08));
+}
+
+.table thead th {
+  background-color: transparent;
+  color: var(--octo-ink);
+  border: none;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #f5f7fb;
+}
+
+.table tbody tr:hover td {
+  color: var(--octo-ink);
+}
+
+.badge {
+  font-weight: 600;
+}
+
+.modal {
+  z-index: 1060;
+}
+
+.modal-backdrop.show {
+  opacity: 0.45;
+  z-index: 1040;
+}
+
+.modal-content {
+  border: none;
+  box-shadow: 0 20px 50px rgba(17, 24, 39, 0.22);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, #1f3b66 0%, #2d4f81 60%, #3a5f92 100%);
+  border-color: #1f3b66;
+  box-shadow: 0 12px 30px rgba(31, 59, 102, 0.3);
+}
+
+.btn-outline-primary {
+  color: var(--octo-primary);
+  border-color: var(--octo-primary);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--octo-primary);
+  color: #fff;
+}
+
+.btn-light {
+  color: var(--octo-ink);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
+}
+
+.btn {
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.btn-light:focus,
+.btn-light:focus-visible,
+.btn-outline-light:focus,
+.btn-outline-light:focus-visible {
+  outline: none;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.12), 0 0 0 6px rgba(17, 24, 39, 0.06);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--octo-ink);
+}
+
+a {
+  color: var(--octo-primary);
+}
+
+a:hover {
+  color: var(--octo-accent);
+}
+
+.text-muted {
+  color: #5b6473 !important;
+}
+
+.nav-link {
+  letter-spacing: 0.01em;
+}
+
+.pill-link {
+  color: var(--octo-emerald);
+}
