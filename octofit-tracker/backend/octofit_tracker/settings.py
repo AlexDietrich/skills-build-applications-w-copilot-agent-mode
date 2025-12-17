@@ -29,12 +29,9 @@ SECRET_KEY = 'django-insecure-u*l97y6yjn&vb#$h4y#@z)((*%dnk4d3c@pn#nv*r6-4f0__nn
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if os.environ.get('CODESPACE_NAME'):
+    ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev")
 codespace_name = os.environ.get('CODESPACE_NAME')
-if codespace_name:
-    ALLOWED_HOSTS.append(f"{codespace_name}-8000.app.github.dev")
-# Allow wildcard hosts for local development and API access
-if '*' not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append('*')
 
 
 # Application definition
