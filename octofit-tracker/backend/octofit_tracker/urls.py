@@ -35,7 +35,8 @@ else:
     base_url = "http://localhost:8000"
 
 urlpatterns = [
+    path('', tracker_views.api_root, name='api-root'),
     path('admin/', admin.site.urls),
-    path('api/', tracker_views.api_root, name='api-root'),
+    path('api/', tracker_views.api_root),
     path('api/', include(router.urls)),
 ]
